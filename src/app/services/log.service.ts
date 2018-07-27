@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of, observable } from 'rxjs';
+
 
 import { Log } from '../models/Log';
 
@@ -8,15 +10,22 @@ import { Log } from '../models/Log';
 export class LogService {
   logs: Log[];
 
+  private logSource = new BehaviorSubject<Log>({id: null, text: null, date: null});
+  selectedLog = this.logSource.asObservable();
+
   constructor() {
     this.logs = [
-      {id: '1', text: 'Generated New Application', date: new Date ('7/26/2018 2:21')},
-      {id: '2', text: 'Set up Repository', date: new Date ('7/26/2018 2:59')},
-      {id: '3', text: 'Generated Components', date: new Date ('7/26/2018 10:31')}
+      {id: '1', text: 'Fallout 76', date: new Date ('11/14/18')},
+      {id: '2', text: 'Shadow of the Tomb Raider', date: new Date ('9/14/2018')},
+      {id: '3', text: 'Marvel Spider Man', date: new Date ('9/7/2018')}
     ];
   }
 
   getLogs() {
-    return this.logs;
+    return of (this.logs);
+  }
+
+  setFormLog(log: Log) {
+    this.logSource.next(log);
   }
 }

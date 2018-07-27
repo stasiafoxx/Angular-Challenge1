@@ -1,9 +1,9 @@
 <div class="card card-body mb-3">
   <form>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Write here to add a log">
+      <input type="text" name="text" [(ngModel)]="text" class="form-control" placeholder="What games do you want next?">
     </div>
-    <input type="submit" value="Add a Log" class="btn btn-success" [disabled]="!this.text">
+    <input type="submit" value="Add a Game" class="btn btn-success mr-3" [disabled]="!this.text">
     <button type="button" class="btn btn-warning" [hidden]="!this.text">Clear</button>
   </form>
 </div>
